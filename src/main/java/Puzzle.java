@@ -1,9 +1,8 @@
-package logic;
-
 import com.google.common.base.Predicate;
-import domain.Color;
-import domain.Family;
-import domain.Gift;
+import domain.Match;
+import domain.item.Color;
+import domain.item.Family;
+import domain.item.Gift;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,17 +1,16 @@
-import domain.Color;
-import domain.Family;
-import domain.Gift;
+import domain.item.Color;
+import domain.item.Family;
+import domain.item.Gift;
 import junitx.framework.ListAssert;
-import logic.Match;
-import logic.Puzzle;
+import domain.Match;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-import static domain.Color.*;
-import static domain.Family.*;
-import static domain.Gift.*;
+import static domain.item.Color.*;
+import static domain.item.Family.*;
+import static domain.item.Gift.*;
 import static java.util.Arrays.asList;
 import static junit.framework.Assert.assertTrue;
 import static junitx.framework.Assert.assertEquals;

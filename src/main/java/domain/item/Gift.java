@@ -1,4 +1,4 @@
-package domain;
+package domain.item;
 
 public enum Gift {
     BOOK,

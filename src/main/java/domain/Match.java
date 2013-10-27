@@ -1,8 +1,8 @@
-package logic;
+package domain;
 
-import domain.Color;
-import domain.Family;
-import domain.Gift;
+import domain.item.Color;
+import domain.item.Family;
+import domain.item.Gift;
 
 import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
