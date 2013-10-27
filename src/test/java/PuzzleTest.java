@@ -1,10 +1,8 @@
-import domain.item.Color;
-import domain.item.Family;
-import domain.item.Gift;
-import junitx.framework.ListAssert;
 import domain.Match;
+import junitx.framework.ListAssert;
 import org.junit.Before;
 import org.junit.Test;
+import support.MatchAssert;
 
 import java.util.List;
 
@@ -12,7 +10,6 @@ import static domain.item.Color.*;
 import static domain.item.Family.*;
 import static domain.item.Gift.*;
 import static java.util.Arrays.asList;
-import static junit.framework.Assert.assertTrue;
 import static junitx.framework.Assert.assertEquals;
 
 public class PuzzleTest {
@@ -39,11 +36,9 @@ public class PuzzleTest {
         //2
         puzzle.correlate(SISTER, GOLD);
         puzzle.eliminate(SCARF, GOLD);
-        puzzle.eliminate(SISTER, SCARF);
         //3
         puzzle.correlate(GRANDFATHER, WATCH);
         puzzle.eliminate(GRANDFATHER, PURPLE);
-        puzzle.eliminate(WATCH, PURPLE);
         //4
         puzzle.correlate(MOTHER, SILVER);
         //5
@@ -79,78 +74,43 @@ public class PuzzleTest {
     @Test
     public void eliminatingFamilyColorPairShouldRemoveMatchesWithBoth() {
         puzzle.eliminate(GRANDFATHER, GOLD);
-        assertDoesNotContain(puzzle.getMatchesFor(GRANDFATHER), GOLD);
-        assertDoesNotContain(puzzle.getMatchesFor(GOLD), GRANDFATHER);
+        MatchAssert.assertDoesNotContain(puzzle.getMatchesFor(GRANDFATHER), GOLD);
+        MatchAssert.assertDoesNotContain(puzzle.getMatchesFor(GOLD), GRANDFATHER);
     }
 
     @Test
     public void eliminatingFamilyGiftPairShouldRemoveAllMatches() {
         puzzle.eliminate(GRANDFATHER, WATCH);
-        assertDoesNotContain(puzzle.getMatchesFor(GRANDFATHER), WATCH);
-        assertDoesNotContain(puzzle.getMatchesFor(WATCH), GRANDFATHER);
+        MatchAssert.assertDoesNotContain(puzzle.getMatchesFor(GRANDFATHER), WATCH);
+        MatchAssert.assertDoesNotContain(puzzle.getMatchesFor(WATCH), GRANDFATHER);
     }
 
     @Test
     public void eliminatingGiftColorPairShouldRemoveAllMatches() {
         puzzle.eliminate(GLOVES, PURPLE);
-        assertDoesNotContain(puzzle.getMatchesFor(GLOVES), PURPLE);
-        assertDoesNotContain(puzzle.getMatchesFor(PURPLE), GLOVES);
+        MatchAssert.assertDoesNotContain(puzzle.getMatchesFor(GLOVES), PURPLE);
+        MatchAssert.assertDoesNotContain(puzzle.getMatchesFor(PURPLE), GLOVES);
     }
 
     @Test
     public void correlateFamilyColorPairShouldEliminateAllOthers() {
         puzzle.correlate(GRANDFATHER, GOLD);
-        assertOnlyContains(puzzle.getMatchesFor(GRANDFATHER), GOLD);
-        assertOnlyContains(puzzle.getMatchesFor(GOLD), GRANDFATHER);
+        MatchAssert.assertOnlyContains(puzzle.getMatchesFor(GRANDFATHER), GOLD);
+        MatchAssert.assertOnlyContains(puzzle.getMatchesFor(GOLD), GRANDFATHER);
     }
 
     @Test
     public void correlateFamilyGiftPairShouldEliminateAllOthers() {
         puzzle.correlate(GRANDFATHER, WATCH);
-        assertOnlyContains(puzzle.getMatchesFor(GRANDFATHER), WATCH);
-        assertOnlyContains(puzzle.getMatchesFor(WATCH), GRANDFATHER);
+        MatchAssert.assertOnlyContains(puzzle.getMatchesFor(GRANDFATHER), WATCH);
+        MatchAssert.assertOnlyContains(puzzle.getMatchesFor(WATCH), GRANDFATHER);
     }
 
     @Test
     public void correlateGiftColorPairShouldEliminateAllOthers() {
         puzzle.correlate(WATCH, PURPLE);
-        assertOnlyContains(puzzle.getMatchesFor(WATCH), PURPLE);
-        assertOnlyContains(puzzle.getMatchesFor(PURPLE), WATCH);
+        MatchAssert.assertOnlyContains(puzzle.getMatchesFor(WATCH), PURPLE);
+        MatchAssert.assertOnlyContains(puzzle.getMatchesFor(PURPLE), WATCH);
     }
 
-    private void assertOnlyContains(List<Match> matches, Color color) {
-        for (Match match : matches) {
-            assertTrue("Fail: More than " + color + " found in list.", match.getColor() == color);
-        }
-    }
-
-    private void assertOnlyContains(List<Match> matches, Gift gift) {
-        for (Match match : matches) {
-            assertTrue("Fail: More than " + gift + " found in list.", match.getGift() == gift);
-        }
-    }
-
-    private void assertOnlyContains(List<Match> matches, Family family) {
-        for (Match match : matches) {
-            assertTrue("Fail: More than " + family + " found in list.", match.getFamily() == family);
-        }
-    }
-
-    private void assertDoesNotContain(List<Match> matches, Gift gift) {
-        for (Match match : matches) {
-            assertTrue("Fail: " + gift + " found in list.", match.getGift() != gift);
-        }
-    }
-
-    private void assertDoesNotContain(List<Match> matches, Color color) {
-        for (Match match : matches) {
-            assertTrue("Fail: " + color + " found in list.", match.getColor() != color);
-        }
-    }
-
-    private void assertDoesNotContain(List<Match> matches, Family family) {
-        for (Match match : matches) {
-            assertTrue("Fail: " + family + " found in list.", match.getFamily() != family);
-        }
-    }
 }

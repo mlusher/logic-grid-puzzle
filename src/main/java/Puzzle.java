@@ -25,10 +25,6 @@ public class Puzzle {
         }
     }
 
-    public Puzzle(List<Match> matches) {
-        this.matches = matches;
-    }
-
     public List<Match> getMatches() {
         return matches;
     }
